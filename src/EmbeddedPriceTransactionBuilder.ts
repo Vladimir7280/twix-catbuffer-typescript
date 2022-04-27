@@ -8,10 +8,10 @@ import { Serializer } from './Serializer';
 import { TransactionTypeDto } from './TransactionTypeDto';
 
 /**
- * Embedded version of AddressAliasTransaction.
+ * Embedded version of PriceTransaction.
  **/
 export class EmbeddedPriceTransactionBuilder extends EmbeddedTransactionBuilder implements Serializer {
-    /** Address alias transaction body. **/
+    /** Price transaction body. **/
     readonly priceTransactionBody: PriceTransactionBodyBuilder;
 
     /**
@@ -21,9 +21,9 @@ export class EmbeddedPriceTransactionBuilder extends EmbeddedTransactionBuilder 
      * @param version Version of this structure..
      * @param network Network on which this entity was created..
      * @param type Transaction type.
-     * @param blockHeight Identifier of the namespace that will become (or stop being) an alias for the address..
-     * @param highPrice Aliased address..
-     * @param lowPrice Alias action..
+     * @param blockHeight The block the price change was registered for.
+     * @param highPrice Highest price from the exchange since the last price transaction.
+     * @param lowPrice Lowest price from the exchange since the last price transaction.
      */
     public constructor(
         signerPublicKey: PublicKeyDto,
@@ -70,10 +70,10 @@ export class EmbeddedPriceTransactionBuilder extends EmbeddedTransactionBuilder 
      * @param version Version of this structure..
      * @param network Network on which this entity was created..
      * @param type Transaction type.
-     * @param blockHeight Identifier of the namespace that will become (or stop being) an alias for the address..
-     * @param highPrice Aliased address..
-     * @param lowPrice Alias action..
-     * @return Instance of EmbeddedAddressAliasTransactionBuilder.
+     * @param blockHeight The block the price change was registered for.
+     * @param highPrice Highest price from the exchange since the last price transaction.
+     * @param lowPrice Lowest price from the exchange since the last price transaction.
+     * @return Instance of EmbeddedPriceTransactionBuilder.
      */
     public static createEmbeddedPriceTransactionBuilder(
         signerPublicKey: PublicKeyDto,
@@ -88,27 +88,27 @@ export class EmbeddedPriceTransactionBuilder extends EmbeddedTransactionBuilder 
     }
 
     /**
-     * Gets Identifier of the namespace that will become (or stop being) an alias for the address..
+     * Gets The block the price change was registered for.
      *
-     * @return Identifier of the namespace that will become (or stop being) an alias for the address..
+     * @return The block the price change was registered for.
      */
     public getblockHeight(): AmountDto {
         return this.priceTransactionBody.getblockHeight();
     }
 
     /**
-     * Gets Aliased address..
+     * Gets highPrice.
      *
-     * @return Aliased address..
+     * @return highPrice.
      */
     public gethighPrice(): AmountDto {
         return this.priceTransactionBody.gethighPrice();
     }
 
     /**
-     * Gets Alias action..
+     * Gets lowPrice.
      *
-     * @return Alias action..
+     * @return lowPrice.
      */
     public getlowPrice(): AmountDto {
         return this.priceTransactionBody.getlowPrice();
@@ -121,7 +121,7 @@ export class EmbeddedPriceTransactionBuilder extends EmbeddedTransactionBuilder 
      */
     public getSize(): number {
         let size = super.getSize();
-        size += this.priceTransactionBody.getSize(); // addressAliasTransactionBody
+        size += this.priceTransactionBody.getSize(); // PriceTransactionBody
         return size;
     }
 

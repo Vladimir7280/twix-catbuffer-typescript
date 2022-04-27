@@ -3,10 +3,10 @@ import { GeneratorUtils } from './GeneratorUtils';
 import { Serializer } from './Serializer';
 
 /**
- * Shared content between AddressAliasTransaction and EmbeddedAddressAliasTransaction.
+ * Shared content between PriceTransaction and EmbeddedPriceTransaction.
  **/
 export class PriceTransactionBodyBuilder implements Serializer {
-    /** Identifier of the namespace that will become (or stop being) an alias for the address.. **/
+    /** The block the price change was registered for **/
     readonly blockHeight: AmountDto;
 
     /** Aliased address.. **/
@@ -18,9 +18,9 @@ export class PriceTransactionBodyBuilder implements Serializer {
     /**
      * Constructor.
      *
-     * @param blockHeight Identifier of the namespace that will become (or stop being) an alias for the address..
-     * @param highPrice Aliased address..
-     * @param lowPrice Alias action..
+     * @param blockHeight The block the price change was registered for
+     * @param highPrice Highest price from the exchange since the last price transaction
+     * @param lowPrice Lowest price from the exchange since the last price transaction
      */
     public constructor(blockHeight: AmountDto, highPrice: AmountDto, lowPrice: AmountDto) {
         GeneratorUtils.notNull(blockHeight, 'blockHeight is null or undefined');
@@ -49,11 +49,11 @@ export class PriceTransactionBodyBuilder implements Serializer {
     }
 
     /**
-     * Creates an instance of AddressAliasTransactionBodyBuilder.
+     * Creates an instance of PriceTransactionBodyBuilder.
      *
-     * @param blockHeight Identifier of the namespace that will become (or stop being) an alias for the address..
-     * @param highPrice Aliased address..
-     * @param lowPrice Alias action..
+     * @param blockHeight The block the price change was registered for
+     * @param highPrice Highest price from the exchange since the last price transaction
+     * @param lowPrice Lowest price from the exchange since the last price transaction
      * @return Instance of AddressAliasTransactionBodyBuilder.
      */
     public static createAddressAliasTransactionBodyBuilder(
@@ -65,27 +65,27 @@ export class PriceTransactionBodyBuilder implements Serializer {
     }
 
     /**
-     * Gets Identifier of the namespace that will become (or stop being) an alias for the address..
+     * Gets The block the price change was registered for
      *
-     * @return Identifier of the namespace that will become (or stop being) an alias for the address..
+     * @return The block the price change was registered for
      */
     public getblockHeight(): AmountDto {
         return this.blockHeight;
     }
 
     /**
-     * Gets Aliased address..
+     * Gets highPrice
      *
-     * @return Aliased address..
+     * @return highPrice
      */
     public gethighPrice(): AmountDto {
         return this.highPrice;
     }
 
     /**
-     * Gets Alias action..
+     * Gets lowPrice
      *
-     * @return Alias action..
+     * @return lowPrice
      */
     public getlowPrice(): AmountDto {
         return this.lowPrice;
