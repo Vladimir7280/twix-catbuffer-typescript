@@ -1,4 +1,5 @@
 import { AddressDto } from './AddressDto';
+import { AmountDto } from './AmountDto';
 import { BlockFeeMultiplierDto } from './BlockFeeMultiplierDto';
 import { BlockTypeDto } from './BlockTypeDto';
 import { DifficultyDto } from './DifficultyDto';
@@ -26,9 +27,13 @@ export declare class BlockHeaderBuilder implements Serializer {
     readonly stateHash: Hash256Dto;
     readonly beneficiaryAddress: AddressDto;
     readonly feeMultiplier: BlockFeeMultiplierDto;
-    constructor(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto);
+    readonly totalSupply: AmountDto;
+    readonly feeToPay: AmountDto;
+    readonly inflation: AmountDto;
+    readonly collectedEpochFees: AmountDto;
+    constructor(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto, totalSupply: AmountDto, feeToPay: AmountDto, inflation: AmountDto, collectedEpochFees: AmountDto);
     static loadFromBinary(payload: Uint8Array): BlockHeaderBuilder;
-    static createBlockHeaderBuilder(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto): BlockHeaderBuilder;
+    static createBlockHeaderBuilder(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto, totalSupply: AmountDto, feeToPay: AmountDto, inflation: AmountDto, collectedEpochFees: AmountDto): BlockHeaderBuilder;
     getSignature(): SignatureDto;
     getSignerPublicKey(): PublicKeyDto;
     getVersion(): number;
@@ -44,6 +49,10 @@ export declare class BlockHeaderBuilder implements Serializer {
     getStateHash(): Hash256Dto;
     getBeneficiaryAddress(): AddressDto;
     getFeeMultiplier(): BlockFeeMultiplierDto;
+    gettotalSupply(): AmountDto;
+    getfeeToPay(): AmountDto;
+    getinflation(): AmountDto;
+    getcollectedEpochFees(): AmountDto;
     getSize(): number;
     serialize(): Uint8Array;
 }

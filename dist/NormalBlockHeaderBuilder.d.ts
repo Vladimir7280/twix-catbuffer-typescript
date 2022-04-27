@@ -1,4 +1,5 @@
 import { AddressDto } from './AddressDto';
+import { AmountDto } from './AmountDto';
 import { BlockFeeMultiplierDto } from './BlockFeeMultiplierDto';
 import { BlockHeaderBuilder } from './BlockHeaderBuilder';
 import { BlockTypeDto } from './BlockTypeDto';
@@ -12,9 +13,9 @@ import { SignatureDto } from './SignatureDto';
 import { TimestampDto } from './TimestampDto';
 import { VrfProofBuilder } from './VrfProofBuilder';
 export declare class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Serializer {
-    constructor(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto);
+    constructor(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto, totalSupply: AmountDto, feeToPay: AmountDto, inflation: AmountDto, collectedEpochFees: AmountDto);
     static loadFromBinary(payload: Uint8Array): NormalBlockHeaderBuilder;
-    static createNormalBlockHeaderBuilder(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto): NormalBlockHeaderBuilder;
+    static createNormalBlockHeaderBuilder(signature: SignatureDto, signerPublicKey: PublicKeyDto, version: number, network: NetworkTypeDto, type: BlockTypeDto, height: HeightDto, timestamp: TimestampDto, difficulty: DifficultyDto, generationHashProof: VrfProofBuilder, previousBlockHash: Hash256Dto, transactionsHash: Hash256Dto, receiptsHash: Hash256Dto, stateHash: Hash256Dto, beneficiaryAddress: AddressDto, feeMultiplier: BlockFeeMultiplierDto, totalSupply: AmountDto, feeToPay: AmountDto, inflation: AmountDto, collectedEpochFees: AmountDto): NormalBlockHeaderBuilder;
     getSize(): number;
     serialize(): Uint8Array;
 }

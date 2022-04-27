@@ -61,6 +61,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
      * @param stateHash Hash of the global chain state at this block.
      * @param beneficiaryAddress Beneficiary address designated by harvester.
      * @param feeMultiplier Fee multiplier applied to block transactions.
+     * @param totalSupply totalSupply.
+     * @param feeToPay feeToPay.
+     * @param inflation inflation.
+     * @param collectedEpochFees collectedEpochFees.
      * @param votingEligibleAccountsCount Number of voting eligible accounts.
      * @param harvestingEligibleAccountsCount Number of harvesting eligible accounts.
      * @param totalVotingBalance Total balance eligible for voting.
@@ -82,6 +86,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
         stateHash: Hash256Dto,
         beneficiaryAddress: AddressDto,
         feeMultiplier: BlockFeeMultiplierDto,
+        totalSupply: AmountDto,
+        feeToPay: AmountDto,
+        inflation: AmountDto,
+        collectedEpochFees: AmountDto,
         votingEligibleAccountsCount: number,
         harvestingEligibleAccountsCount: number[],
         totalVotingBalance: AmountDto,
@@ -103,6 +111,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
             stateHash,
             beneficiaryAddress,
             feeMultiplier,
+            totalSupply,
+            feeToPay,
+            inflation,
+            collectedEpochFees,
         );
         this.importanceBlockFooter = new ImportanceBlockFooterBuilder(
             votingEligibleAccountsCount,
@@ -140,6 +152,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
             superObject.stateHash,
             superObject.beneficiaryAddress,
             superObject.feeMultiplier,
+            superObject.totalSupply,
+            superObject.feeToPay,
+            superObject.inflation,
+            superObject.collectedEpochFees,
             importanceBlockFooter.votingEligibleAccountsCount,
             importanceBlockFooter.harvestingEligibleAccountsCount,
             importanceBlockFooter.totalVotingBalance,
@@ -165,6 +181,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
      * @param stateHash Hash of the global chain state at this block.
      * @param beneficiaryAddress Beneficiary address designated by harvester.
      * @param feeMultiplier Fee multiplier applied to block transactions.
+     * @param totalSupply totalSupply.
+     * @param feeToPay feeToPay.
+     * @param inflation inflation.
+     * @param collectedEpochFees collectedEpochFees.
      * @param votingEligibleAccountsCount Number of voting eligible accounts.
      * @param harvestingEligibleAccountsCount Number of harvesting eligible accounts.
      * @param totalVotingBalance Total balance eligible for voting.
@@ -187,6 +207,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
         stateHash: Hash256Dto,
         beneficiaryAddress: AddressDto,
         feeMultiplier: BlockFeeMultiplierDto,
+        totalSupply: AmountDto,
+        feeToPay: AmountDto,
+        inflation: AmountDto,
+        collectedEpochFees: AmountDto,
         votingEligibleAccountsCount: number,
         harvestingEligibleAccountsCount: number[],
         totalVotingBalance: AmountDto,
@@ -208,6 +232,10 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
             stateHash,
             beneficiaryAddress,
             feeMultiplier,
+            totalSupply,
+            feeToPay,
+            inflation,
+            collectedEpochFees,
             votingEligibleAccountsCount,
             harvestingEligibleAccountsCount,
             totalVotingBalance,

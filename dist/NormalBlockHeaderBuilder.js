@@ -4,8 +4,8 @@ exports.NormalBlockHeaderBuilder = void 0;
 const BlockHeaderBuilder_1 = require("./BlockHeaderBuilder");
 const GeneratorUtils_1 = require("./GeneratorUtils");
 class NormalBlockHeaderBuilder extends BlockHeaderBuilder_1.BlockHeaderBuilder {
-    constructor(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier) {
-        super(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier);
+    constructor(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees) {
+        super(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees);
     }
     static loadFromBinary(payload) {
         const byteArray = Array.from(payload);
@@ -13,10 +13,10 @@ class NormalBlockHeaderBuilder extends BlockHeaderBuilder_1.BlockHeaderBuilder {
         byteArray.splice(0, superObject.getSize());
         GeneratorUtils_1.GeneratorUtils.bufferToUint32(Uint8Array.from(byteArray));
         byteArray.splice(0, 4);
-        return new NormalBlockHeaderBuilder(superObject.signature, superObject.signerPublicKey, superObject.version, superObject.network, superObject.type, superObject.height, superObject.timestamp, superObject.difficulty, superObject.generationHashProof, superObject.previousBlockHash, superObject.transactionsHash, superObject.receiptsHash, superObject.stateHash, superObject.beneficiaryAddress, superObject.feeMultiplier);
+        return new NormalBlockHeaderBuilder(superObject.signature, superObject.signerPublicKey, superObject.version, superObject.network, superObject.type, superObject.height, superObject.timestamp, superObject.difficulty, superObject.generationHashProof, superObject.previousBlockHash, superObject.transactionsHash, superObject.receiptsHash, superObject.stateHash, superObject.beneficiaryAddress, superObject.feeMultiplier, superObject.totalSupply, superObject.feeToPay, superObject.inflation, superObject.collectedEpochFees);
     }
-    static createNormalBlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier) {
-        return new NormalBlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier);
+    static createNormalBlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees) {
+        return new NormalBlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees);
     }
     getSize() {
         let size = super.getSize();

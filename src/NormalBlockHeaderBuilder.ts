@@ -20,6 +20,7 @@
  **/
 
 import { AddressDto } from './AddressDto';
+import { AmountDto  } from './AmountDto';
 import { BlockFeeMultiplierDto } from './BlockFeeMultiplierDto';
 import { BlockHeaderBuilder } from './BlockHeaderBuilder';
 import { BlockTypeDto } from './BlockTypeDto';
@@ -56,6 +57,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
      * @param stateHash Hash of the global chain state at this block.
      * @param beneficiaryAddress Beneficiary address designated by harvester.
      * @param feeMultiplier Fee multiplier applied to block transactions.
+     * @param totalSupply totalSupply.
+     * @param feeToPay feeToPay.
+     * @param inflation inflation.
+     * @param collectedEpochFees collectedEpochFees.
      */
     public constructor(
         signature: SignatureDto,
@@ -73,6 +78,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
         stateHash: Hash256Dto,
         beneficiaryAddress: AddressDto,
         feeMultiplier: BlockFeeMultiplierDto,
+        totalSupply: AmountDto,
+        feeToPay: AmountDto,
+        inflation: AmountDto,
+        collectedEpochFees: AmountDto,
     ) {
         super(
             signature,
@@ -90,6 +99,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
             stateHash,
             beneficiaryAddress,
             feeMultiplier,
+            totalSupply,
+            feeToPay,
+            inflation,
+            collectedEpochFees,
         );
     }
 
@@ -121,6 +134,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
             superObject.stateHash,
             superObject.beneficiaryAddress,
             superObject.feeMultiplier,
+            superObject.totalSupply,
+            superObject.feeToPay,
+            superObject.inflation,
+            superObject.collectedEpochFees,
         );
     }
 
@@ -142,6 +159,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
      * @param stateHash Hash of the global chain state at this block.
      * @param beneficiaryAddress Beneficiary address designated by harvester.
      * @param feeMultiplier Fee multiplier applied to block transactions.
+     * @param totalSupply totalSupply.
+     * @param feeToPay feeToPay.
+     * @param inflation inflation.
+     * @param collectedEpochFees collectedEpochFees.
      * @return Instance of NormalBlockHeaderBuilder.
      */
     public static createNormalBlockHeaderBuilder(
@@ -160,6 +181,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
         stateHash: Hash256Dto,
         beneficiaryAddress: AddressDto,
         feeMultiplier: BlockFeeMultiplierDto,
+        totalSupply: AmountDto,
+        feeToPay: AmountDto,
+        inflation: AmountDto,
+        collectedEpochFees: AmountDto,
     ): NormalBlockHeaderBuilder {
         return new NormalBlockHeaderBuilder(
             signature,
@@ -177,6 +202,10 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
             stateHash,
             beneficiaryAddress,
             feeMultiplier,
+            totalSupply,
+            feeToPay,
+            inflation,
+            collectedEpochFees,
         );
     }
 

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlockHeaderBuilder = void 0;
 const AddressDto_1 = require("./AddressDto");
+const AmountDto_1 = require("./AmountDto");
 const BlockFeeMultiplierDto_1 = require("./BlockFeeMultiplierDto");
 const DifficultyDto_1 = require("./DifficultyDto");
 const GeneratorUtils_1 = require("./GeneratorUtils");
@@ -12,7 +13,7 @@ const SignatureDto_1 = require("./SignatureDto");
 const TimestampDto_1 = require("./TimestampDto");
 const VrfProofBuilder_1 = require("./VrfProofBuilder");
 class BlockHeaderBuilder {
-    constructor(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier) {
+    constructor(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees) {
         GeneratorUtils_1.GeneratorUtils.notNull(signature, 'signature is null or undefined');
         GeneratorUtils_1.GeneratorUtils.notNull(signerPublicKey, 'signerPublicKey is null or undefined');
         GeneratorUtils_1.GeneratorUtils.notNull(version, 'version is null or undefined');
@@ -28,6 +29,10 @@ class BlockHeaderBuilder {
         GeneratorUtils_1.GeneratorUtils.notNull(stateHash, 'stateHash is null or undefined');
         GeneratorUtils_1.GeneratorUtils.notNull(beneficiaryAddress, 'beneficiaryAddress is null or undefined');
         GeneratorUtils_1.GeneratorUtils.notNull(feeMultiplier, 'feeMultiplier is null or undefined');
+        GeneratorUtils_1.GeneratorUtils.notNull(totalSupply, 'feeMultiplier is null or undefined');
+        GeneratorUtils_1.GeneratorUtils.notNull(feeToPay, 'feeMultiplier is null or undefined');
+        GeneratorUtils_1.GeneratorUtils.notNull(inflation, 'feeMultiplier is null or undefined');
+        GeneratorUtils_1.GeneratorUtils.notNull(collectedEpochFees, 'feeMultiplier is null or undefined');
         this.signature = signature;
         this.signerPublicKey = signerPublicKey;
         this.version = version;
@@ -43,6 +48,10 @@ class BlockHeaderBuilder {
         this.stateHash = stateHash;
         this.beneficiaryAddress = beneficiaryAddress;
         this.feeMultiplier = feeMultiplier;
+        this.totalSupply = totalSupply;
+        this.feeToPay = feeToPay;
+        this.inflation = inflation;
+        this.collectedEpochFees = collectedEpochFees;
     }
     static loadFromBinary(payload) {
         const byteArray = Array.from(payload);
@@ -82,10 +91,18 @@ class BlockHeaderBuilder {
         byteArray.splice(0, beneficiaryAddress.getSize());
         const feeMultiplier = BlockFeeMultiplierDto_1.BlockFeeMultiplierDto.loadFromBinary(Uint8Array.from(byteArray));
         byteArray.splice(0, feeMultiplier.getSize());
-        return new BlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier);
+        const totalSupply = AmountDto_1.AmountDto.loadFromBinary(Uint8Array.from(byteArray));
+        byteArray.splice(0, totalSupply.getSize());
+        const feeToPay = AmountDto_1.AmountDto.loadFromBinary(Uint8Array.from(byteArray));
+        byteArray.splice(0, feeToPay.getSize());
+        const inflation = AmountDto_1.AmountDto.loadFromBinary(Uint8Array.from(byteArray));
+        byteArray.splice(0, inflation.getSize());
+        const collectedEpochFees = AmountDto_1.AmountDto.loadFromBinary(Uint8Array.from(byteArray));
+        byteArray.splice(0, collectedEpochFees.getSize());
+        return new BlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees);
     }
-    static createBlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier) {
-        return new BlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier);
+    static createBlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees) {
+        return new BlockHeaderBuilder(signature, signerPublicKey, version, network, type, height, timestamp, difficulty, generationHashProof, previousBlockHash, transactionsHash, receiptsHash, stateHash, beneficiaryAddress, feeMultiplier, totalSupply, feeToPay, inflation, collectedEpochFees);
     }
     getSignature() {
         return this.signature;
@@ -132,6 +149,18 @@ class BlockHeaderBuilder {
     getFeeMultiplier() {
         return this.feeMultiplier;
     }
+    gettotalSupply() {
+        return this.totalSupply;
+    }
+    getfeeToPay() {
+        return this.feeToPay;
+    }
+    getinflation() {
+        return this.inflation;
+    }
+    getcollectedEpochFees() {
+        return this.collectedEpochFees;
+    }
     getSize() {
         let size = 0;
         size += 4;
@@ -152,6 +181,10 @@ class BlockHeaderBuilder {
         size += this.stateHash.getSize();
         size += this.beneficiaryAddress.getSize();
         size += this.feeMultiplier.getSize();
+        size += this.totalSupply.getSize();
+        size += this.feeToPay.getSize();
+        size += this.inflation.getSize();
+        size += this.collectedEpochFees.getSize();
         return size;
     }
     serialize() {
@@ -192,6 +225,14 @@ class BlockHeaderBuilder {
         newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, beneficiaryAddressBytes);
         const feeMultiplierBytes = this.feeMultiplier.serialize();
         newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, feeMultiplierBytes);
+        const totalSupplyBytes = this.totalSupply.serialize();
+        newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, totalSupplyBytes);
+        const feeToPayBytes = this.feeToPay.serialize();
+        newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, feeToPayBytes);
+        const inflationBytes = this.inflation.serialize();
+        newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, inflationBytes);
+        const collectedEpochFeesBytes = this.collectedEpochFees.serialize();
+        newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, collectedEpochFeesBytes);
         return newArray;
     }
 }
