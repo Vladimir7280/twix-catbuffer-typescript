@@ -47,7 +47,7 @@ class PriceTransactionBodyBuilder {
         newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, blockHeightBytes);
         const highPriceBytes = this.highPrice.serialize();
         newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, highPriceBytes);
-        const lowPriceBytes = this.highPrice.serialize();
+        const lowPriceBytes = this.lowPrice.serialize();
         newArray = GeneratorUtils_1.GeneratorUtils.concatTypedArrays(newArray, lowPriceBytes);
         return newArray;
     }
