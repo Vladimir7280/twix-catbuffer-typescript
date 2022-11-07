@@ -1,4 +1,4 @@
 export interface Serializer {
     serialize(): Uint8Array;
-    getSize(): number;
+    readonly size: number;
 }
