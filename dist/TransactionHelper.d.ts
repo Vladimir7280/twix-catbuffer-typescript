@@ -1,4 +1,4 @@
-import { TransactionBuilder } from './TransactionBuilder';
+import { Transaction } from './Transaction';
 export declare class TransactionHelper {
-    static loadFromBinary(payload: Uint8Array): TransactionBuilder;
+    static deserialize(payload: Uint8Array): Transaction;
 }
