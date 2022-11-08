@@ -263,6 +263,57 @@ export class AccountStateBuilder extends StateHeaderBuilder implements Serialize
      * @param nodePublicKey Node public key.
      * @param vrfPublicKey Vrf public key.
      * @param votingPublicKeys Voting public keys.
+     * @param balances Balances of account.
+     * @return Instance of AccountStateBuilder.
+     */
+    public static createAccountStateBuilderREGULAR(
+        version: number,
+        address: AddressDto,
+        addressHeight: HeightDto,
+        publicKey: PublicKeyDto,
+        publicKeyHeight: HeightDto,
+        accountType: AccountTypeDto,
+        supplementalPublicKeysMask: AccountKeyTypeFlagsDto[],
+        linkedPublicKey: PublicKeyDto,
+        nodePublicKey: PublicKeyDto,
+        vrfPublicKey: PublicKeyDto,
+        votingPublicKeys: PinnedVotingKeyBuilder[],
+        balances: MosaicBuilder[],
+    ): AccountStateBuilder {
+        const format = AccountStateFormatDto.REGULAR;
+        return new AccountStateBuilder(
+            version,
+            address,
+            addressHeight,
+            publicKey,
+            publicKeyHeight,
+            accountType,
+            format,
+            supplementalPublicKeysMask,
+            linkedPublicKey,
+            nodePublicKey,
+            vrfPublicKey,
+            votingPublicKeys,
+            undefined,
+            undefined,
+            balances,
+        );
+    }
+
+    /**
+     * Creates an instance of AccountStateBuilder.
+     *
+     * @param version Serialization version.
+     * @param address Address of account.
+     * @param addressHeight Height at which address has been obtained.
+     * @param publicKey Public key of account.
+     * @param publicKeyHeight Height at which public key has been obtained.
+     * @param accountType Type of account.
+     * @param supplementalPublicKeysMask Mask of supplemental public key flags.
+     * @param linkedPublicKey Linked account public key.
+     * @param nodePublicKey Node public key.
+     * @param vrfPublicKey Vrf public key.
+     * @param votingPublicKeys Voting public keys.
      * @param importanceSnapshots Current importance snapshot of the account.
      * @param activityBuckets Activity buckets of the account.
      * @param balances Balances of account.
@@ -300,57 +351,6 @@ export class AccountStateBuilder extends StateHeaderBuilder implements Serialize
             votingPublicKeys,
             importanceSnapshots,
             activityBuckets,
-            balances,
-        );
-    }
-
-    /**
-     * Creates an instance of AccountStateBuilder.
-     *
-     * @param version Serialization version.
-     * @param address Address of account.
-     * @param addressHeight Height at which address has been obtained.
-     * @param publicKey Public key of account.
-     * @param publicKeyHeight Height at which public key has been obtained.
-     * @param accountType Type of account.
-     * @param supplementalPublicKeysMask Mask of supplemental public key flags.
-     * @param linkedPublicKey Linked account public key.
-     * @param nodePublicKey Node public key.
-     * @param vrfPublicKey Vrf public key.
-     * @param votingPublicKeys Voting public keys.
-     * @param balances Balances of account.
-     * @return Instance of AccountStateBuilder.
-     */
-    public static createAccountStateBuilderREGULAR(
-        version: number,
-        address: AddressDto,
-        addressHeight: HeightDto,
-        publicKey: PublicKeyDto,
-        publicKeyHeight: HeightDto,
-        accountType: AccountTypeDto,
-        supplementalPublicKeysMask: AccountKeyTypeFlagsDto[],
-        linkedPublicKey: PublicKeyDto,
-        nodePublicKey: PublicKeyDto,
-        vrfPublicKey: PublicKeyDto,
-        votingPublicKeys: PinnedVotingKeyBuilder[],
-        balances: MosaicBuilder[],
-    ): AccountStateBuilder {
-        const format = AccountStateFormatDto.REGULAR;
-        return new AccountStateBuilder(
-            version,
-            address,
-            addressHeight,
-            publicKey,
-            publicKeyHeight,
-            accountType,
-            format,
-            supplementalPublicKeysMask,
-            linkedPublicKey,
-            nodePublicKey,
-            vrfPublicKey,
-            votingPublicKeys,
-            undefined,
-            undefined,
             balances,
         );
     }

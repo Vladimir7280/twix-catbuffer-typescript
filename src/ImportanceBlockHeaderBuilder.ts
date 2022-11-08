@@ -65,6 +65,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
      * @param feeToPay feeToPay.
      * @param inflation inflation.
      * @param collectedEpochFees collectedEpochFees.
+     * @param inflationMultiplier inflationMultiplier.
      * @param votingEligibleAccountsCount Number of voting eligible accounts.
      * @param harvestingEligibleAccountsCount Number of harvesting eligible accounts.
      * @param totalVotingBalance Total balance eligible for voting.
@@ -90,6 +91,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
         feeToPay: AmountDto,
         inflation: AmountDto,
         collectedEpochFees: AmountDto,
+        inflationMultiplier: AmountDto,
         votingEligibleAccountsCount: number,
         harvestingEligibleAccountsCount: number[],
         totalVotingBalance: AmountDto,
@@ -115,6 +117,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
             feeToPay,
             inflation,
             collectedEpochFees,
+            inflationMultiplier,
         );
         this.importanceBlockFooter = new ImportanceBlockFooterBuilder(
             votingEligibleAccountsCount,
@@ -156,6 +159,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
             superObject.feeToPay,
             superObject.inflation,
             superObject.collectedEpochFees,
+            superObject.inflationMultiplier,
             importanceBlockFooter.votingEligibleAccountsCount,
             importanceBlockFooter.harvestingEligibleAccountsCount,
             importanceBlockFooter.totalVotingBalance,
@@ -185,6 +189,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
      * @param feeToPay feeToPay.
      * @param inflation inflation.
      * @param collectedEpochFees collectedEpochFees.
+     * @param inflationMultiplier inflationMultiplier.
      * @param votingEligibleAccountsCount Number of voting eligible accounts.
      * @param harvestingEligibleAccountsCount Number of harvesting eligible accounts.
      * @param totalVotingBalance Total balance eligible for voting.
@@ -211,6 +216,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
         feeToPay: AmountDto,
         inflation: AmountDto,
         collectedEpochFees: AmountDto,
+        inflationMultiplier: AmountDto,
         votingEligibleAccountsCount: number,
         harvestingEligibleAccountsCount: number[],
         totalVotingBalance: AmountDto,
@@ -236,6 +242,7 @@ export class ImportanceBlockHeaderBuilder extends BlockHeaderBuilder implements 
             feeToPay,
             inflation,
             collectedEpochFees,
+            inflationMultiplier,
             votingEligibleAccountsCount,
             harvestingEligibleAccountsCount,
             totalVotingBalance,

@@ -20,7 +20,7 @@
  **/
 
 import { AddressDto } from './AddressDto';
-import { AmountDto  } from './AmountDto';
+import { AmountDto } from './AmountDto';
 import { BlockFeeMultiplierDto } from './BlockFeeMultiplierDto';
 import { BlockTypeDto } from './BlockTypeDto';
 import { DifficultyDto } from './DifficultyDto';
@@ -95,6 +95,9 @@ export class BlockHeaderBuilder implements Serializer {
     /** collectedEpochFees **/
     readonly collectedEpochFees: AmountDto;
 
+    /**  inflationMultiplier */
+    readonly inflationMultiplier: AmountDto;
+
     /**
      * Constructor.
      *
@@ -117,6 +120,7 @@ export class BlockHeaderBuilder implements Serializer {
      * @param feeToPay feeToPay.
      * @param inflation inflation.
      * @param collectedEpochFees collectedEpochFees.
+     * @param inflationMultiplier inflationMultiplier.
      */
     public constructor(
         signature: SignatureDto,
@@ -138,6 +142,7 @@ export class BlockHeaderBuilder implements Serializer {
         feeToPay: AmountDto,
         inflation: AmountDto,
         collectedEpochFees: AmountDto,
+        inflationMultiplier: AmountDto,
     ) {
         GeneratorUtils.notNull(signature, 'signature is null or undefined');
         GeneratorUtils.notNull(signerPublicKey, 'signerPublicKey is null or undefined');
@@ -158,6 +163,7 @@ export class BlockHeaderBuilder implements Serializer {
         GeneratorUtils.notNull(feeToPay, 'feeMultiplier is null or undefined');
         GeneratorUtils.notNull(inflation, 'feeMultiplier is null or undefined');
         GeneratorUtils.notNull(collectedEpochFees, 'feeMultiplier is null or undefined');
+        GeneratorUtils.notNull(inflationMultiplier,'inflationMultiplier is null or undefined');
         this.signature = signature;
         this.signerPublicKey = signerPublicKey;
         this.version = version;
@@ -177,6 +183,7 @@ export class BlockHeaderBuilder implements Serializer {
         this.feeToPay = feeToPay;
         this.inflation = inflation;
         this.collectedEpochFees = collectedEpochFees;
+        this.inflationMultiplier = inflationMultiplier;
     }
 
     /**
@@ -231,6 +238,8 @@ export class BlockHeaderBuilder implements Serializer {
         byteArray.splice(0, inflation.getSize());
         const collectedEpochFees: AmountDto = AmountDto.loadFromBinary(Uint8Array.from(byteArray));
         byteArray.splice(0, collectedEpochFees.getSize());
+        const inflationMultiplier: AmountDto = AmountDto.loadFromBinary(Uint8Array.from(byteArray));
+        byteArray.splice(0, inflationMultiplier.getSize());
         return new BlockHeaderBuilder(
             signature,
             signerPublicKey,
@@ -250,7 +259,8 @@ export class BlockHeaderBuilder implements Serializer {
             totalSupply,
             feeToPay,
             inflation,
-            collectedEpochFees
+            collectedEpochFees,
+            inflationMultiplier
         );
     }
 
@@ -275,7 +285,8 @@ export class BlockHeaderBuilder implements Serializer {
      * @param totalSupply totalSupply.
      * @param feeToPay feeToPay.
      * @param inflation inflation.
-     * @param collectedEpochFees collectedEpochFees
+     * @param collectedEpochFees collectedEpochFees.
+     * @param inflationMultiplier inflationMultiplier.
      * @return Instance of BlockHeaderBuilder.
      */
     public static createBlockHeaderBuilder(
@@ -298,6 +309,7 @@ export class BlockHeaderBuilder implements Serializer {
         feeToPay: AmountDto,
         inflation: AmountDto,
         collectedEpochFees: AmountDto,
+        inflationMultiplier: AmountDto,
     ): BlockHeaderBuilder {
         return new BlockHeaderBuilder(
             signature,
@@ -319,6 +331,7 @@ export class BlockHeaderBuilder implements Serializer {
             feeToPay,
             inflation,
             collectedEpochFees,
+            inflationMultiplier,
         );
     }
 
@@ -494,6 +507,15 @@ export class BlockHeaderBuilder implements Serializer {
     }
 
     /**
+     * Gets inflationMultiplier.
+     *
+     * @return inflationMultiplier.
+     */
+     public getinflationMultiplier(): AmountDto {
+        return this.inflationMultiplier;
+    }
+
+    /**
      * Gets the size of the object.
      *
      * @return Size in bytes.
@@ -522,6 +544,7 @@ export class BlockHeaderBuilder implements Serializer {
         size += this.feeToPay.getSize(); // feeToPay
         size += this.inflation.getSize(); // inflation
         size += this.collectedEpochFees.getSize(); //collectedEpochFees
+        size += this.inflationMultiplier.getSize(); //inflationMultiplier
         return size;
     }
 
@@ -576,6 +599,8 @@ export class BlockHeaderBuilder implements Serializer {
         newArray = GeneratorUtils.concatTypedArrays(newArray, inflationBytes);
         const collectedEpochFeesBytes = this.collectedEpochFees.serialize();
         newArray = GeneratorUtils.concatTypedArrays(newArray, collectedEpochFeesBytes);
+        const inflationMultiplierBytes = this.inflationMultiplier.serialize();
+        newArray = GeneratorUtils.concatTypedArrays(newArray, inflationMultiplierBytes);
         return newArray;
     }
 }

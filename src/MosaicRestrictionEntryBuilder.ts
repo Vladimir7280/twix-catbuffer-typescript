@@ -95,21 +95,6 @@ export class MosaicRestrictionEntryBuilder extends StateHeaderBuilder implements
      * Creates an instance of MosaicRestrictionEntryBuilder.
      *
      * @param version Serialization version.
-     * @param addressEntry Address restriction rule.
-     * @return Instance of MosaicRestrictionEntryBuilder.
-     */
-    public static createMosaicRestrictionEntryBuilderADDRESS(
-        version: number,
-        addressEntry: MosaicAddressRestrictionEntryBuilder,
-    ): MosaicRestrictionEntryBuilder {
-        const entryType = MosaicRestrictionEntryTypeDto.ADDRESS;
-        return new MosaicRestrictionEntryBuilder(version, entryType, addressEntry, undefined);
-    }
-
-    /**
-     * Creates an instance of MosaicRestrictionEntryBuilder.
-     *
-     * @param version Serialization version.
      * @param globalEntry Global mosaic rule.
      * @return Instance of MosaicRestrictionEntryBuilder.
      */
@@ -119,6 +104,21 @@ export class MosaicRestrictionEntryBuilder extends StateHeaderBuilder implements
     ): MosaicRestrictionEntryBuilder {
         const entryType = MosaicRestrictionEntryTypeDto.GLOBAL;
         return new MosaicRestrictionEntryBuilder(version, entryType, undefined, globalEntry);
+    }
+
+    /**
+     * Creates an instance of MosaicRestrictionEntryBuilder.
+     *
+     * @param version Serialization version.
+     * @param addressEntry Address restriction rule.
+     * @return Instance of MosaicRestrictionEntryBuilder.
+     */
+    public static createMosaicRestrictionEntryBuilderADDRESS(
+        version: number,
+        addressEntry: MosaicAddressRestrictionEntryBuilder,
+    ): MosaicRestrictionEntryBuilder {
+        const entryType = MosaicRestrictionEntryTypeDto.ADDRESS;
+        return new MosaicRestrictionEntryBuilder(version, entryType, addressEntry, undefined);
     }
 
     /**

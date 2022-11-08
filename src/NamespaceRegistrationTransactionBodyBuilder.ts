@@ -108,23 +108,6 @@ export class NamespaceRegistrationTransactionBodyBuilder implements Serializer {
     /**
      * Creates an instance of NamespaceRegistrationTransactionBodyBuilder.
      *
-     * @param duration Number of confirmed blocks you would like to rent the namespace for. Required for root namespaces..
-     * @param id Namespace identifier..
-     * @param name Namespace name..
-     * @return Instance of NamespaceRegistrationTransactionBodyBuilder.
-     */
-    public static createNamespaceRegistrationTransactionBodyBuilderROOT(
-        duration: BlockDurationDto,
-        id: NamespaceIdDto,
-        name: Uint8Array,
-    ): NamespaceRegistrationTransactionBodyBuilder {
-        const registrationType = NamespaceRegistrationTypeDto.ROOT;
-        return new NamespaceRegistrationTransactionBodyBuilder(duration, undefined, id, registrationType, name);
-    }
-
-    /**
-     * Creates an instance of NamespaceRegistrationTransactionBodyBuilder.
-     *
      * @param parentId Parent namespace identifier. Required for sub-namespaces..
      * @param id Namespace identifier..
      * @param name Namespace name..
@@ -137,6 +120,23 @@ export class NamespaceRegistrationTransactionBodyBuilder implements Serializer {
     ): NamespaceRegistrationTransactionBodyBuilder {
         const registrationType = NamespaceRegistrationTypeDto.CHILD;
         return new NamespaceRegistrationTransactionBodyBuilder(undefined, parentId, id, registrationType, name);
+    }
+
+    /**
+     * Creates an instance of NamespaceRegistrationTransactionBodyBuilder.
+     *
+     * @param duration Number of confirmed blocks you would like to rent the namespace for. Required for root namespaces..
+     * @param id Namespace identifier..
+     * @param name Namespace name..
+     * @return Instance of NamespaceRegistrationTransactionBodyBuilder.
+     */
+    public static createNamespaceRegistrationTransactionBodyBuilderROOT(
+        duration: BlockDurationDto,
+        id: NamespaceIdDto,
+        name: Uint8Array,
+    ): NamespaceRegistrationTransactionBodyBuilder {
+        const registrationType = NamespaceRegistrationTypeDto.ROOT;
+        return new NamespaceRegistrationTransactionBodyBuilder(duration, undefined, id, registrationType, name);
     }
 
     /**

@@ -1,4 +1,4 @@
-import { EmbeddedTransaction } from './EmbeddedTransaction';
+import { EmbeddedTransactionBuilder } from './EmbeddedTransactionBuilder';
 export declare class EmbeddedTransactionHelper {
-    static deserialize(payload: Uint8Array): EmbeddedTransaction;
+    static loadFromBinary(payload: Uint8Array): EmbeddedTransactionBuilder;
 }

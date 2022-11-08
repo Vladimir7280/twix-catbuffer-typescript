@@ -104,41 +104,6 @@ export class EmbeddedNamespaceRegistrationTransactionBuilder extends EmbeddedTra
      * @param version Version of this structure..
      * @param network Network on which this entity was created..
      * @param type Transaction type.
-     * @param duration Number of confirmed blocks you would like to rent the namespace for. Required for root namespaces..
-     * @param id Namespace identifier..
-     * @param name Namespace name..
-     * @return Instance of EmbeddedNamespaceRegistrationTransactionBuilder.
-     */
-    public static createEmbeddedNamespaceRegistrationTransactionBuilderROOT(
-        signerPublicKey: PublicKeyDto,
-        version: number,
-        network: NetworkTypeDto,
-        type: TransactionTypeDto,
-        duration: BlockDurationDto,
-        id: NamespaceIdDto,
-        name: Uint8Array,
-    ): EmbeddedNamespaceRegistrationTransactionBuilder {
-        const registrationType = NamespaceRegistrationTypeDto.ROOT;
-        return new EmbeddedNamespaceRegistrationTransactionBuilder(
-            signerPublicKey,
-            version,
-            network,
-            type,
-            duration,
-            undefined,
-            id,
-            registrationType,
-            name,
-        );
-    }
-
-    /**
-     * Creates an instance of EmbeddedNamespaceRegistrationTransactionBuilder.
-     *
-     * @param signerPublicKey Public key of the signer of the entity..
-     * @param version Version of this structure..
-     * @param network Network on which this entity was created..
-     * @param type Transaction type.
      * @param parentId Parent namespace identifier. Required for sub-namespaces..
      * @param id Namespace identifier..
      * @param name Namespace name..
@@ -161,6 +126,41 @@ export class EmbeddedNamespaceRegistrationTransactionBuilder extends EmbeddedTra
             type,
             undefined,
             parentId,
+            id,
+            registrationType,
+            name,
+        );
+    }
+
+    /**
+     * Creates an instance of EmbeddedNamespaceRegistrationTransactionBuilder.
+     *
+     * @param signerPublicKey Public key of the signer of the entity..
+     * @param version Version of this structure..
+     * @param network Network on which this entity was created..
+     * @param type Transaction type.
+     * @param duration Number of confirmed blocks you would like to rent the namespace for. Required for root namespaces..
+     * @param id Namespace identifier..
+     * @param name Namespace name..
+     * @return Instance of EmbeddedNamespaceRegistrationTransactionBuilder.
+     */
+    public static createEmbeddedNamespaceRegistrationTransactionBuilderROOT(
+        signerPublicKey: PublicKeyDto,
+        version: number,
+        network: NetworkTypeDto,
+        type: TransactionTypeDto,
+        duration: BlockDurationDto,
+        id: NamespaceIdDto,
+        name: Uint8Array,
+    ): EmbeddedNamespaceRegistrationTransactionBuilder {
+        const registrationType = NamespaceRegistrationTypeDto.ROOT;
+        return new EmbeddedNamespaceRegistrationTransactionBuilder(
+            signerPublicKey,
+            version,
+            network,
+            type,
+            duration,
+            undefined,
             id,
             registrationType,
             name,

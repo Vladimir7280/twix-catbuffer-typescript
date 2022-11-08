@@ -61,6 +61,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
      * @param feeToPay feeToPay.
      * @param inflation inflation.
      * @param collectedEpochFees collectedEpochFees.
+     * @param inflationMultiplier inflationMultiplier.
      */
     public constructor(
         signature: SignatureDto,
@@ -82,6 +83,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
         feeToPay: AmountDto,
         inflation: AmountDto,
         collectedEpochFees: AmountDto,
+        inflationMultiplier: AmountDto,
     ) {
         super(
             signature,
@@ -103,6 +105,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
             feeToPay,
             inflation,
             collectedEpochFees,
+            inflationMultiplier,
         );
     }
 
@@ -138,6 +141,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
             superObject.feeToPay,
             superObject.inflation,
             superObject.collectedEpochFees,
+            superObject.inflationMultiplier,
         );
     }
 
@@ -163,6 +167,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
      * @param feeToPay feeToPay.
      * @param inflation inflation.
      * @param collectedEpochFees collectedEpochFees.
+     * @param inflationMultiplier inflationMultiplier.
      * @return Instance of NormalBlockHeaderBuilder.
      */
     public static createNormalBlockHeaderBuilder(
@@ -185,6 +190,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
         feeToPay: AmountDto,
         inflation: AmountDto,
         collectedEpochFees: AmountDto,
+        inflationMultiplier: AmountDto,
     ): NormalBlockHeaderBuilder {
         return new NormalBlockHeaderBuilder(
             signature,
@@ -206,6 +212,7 @@ export class NormalBlockHeaderBuilder extends BlockHeaderBuilder implements Seri
             feeToPay,
             inflation,
             collectedEpochFees,
+            inflationMultiplier,
         );
     }
 
